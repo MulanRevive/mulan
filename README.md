@@ -18,5 +18,6 @@ Type 'help' for more informations.
 
 ### 大事记
 
+- [木兰编程语言基本功能摸索 (一)](https://zhuanlan.zhihu.com/p/103916529)
 - [为「木兰」编程语言添加对中文命名标识符的支持](https://zhuanlan.zhihu.com/p/103910116)
 - [「MulanRevive」编程语言项目启动](https://zhuanlan.zhihu.com/p/103895446)
