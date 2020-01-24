@@ -18,4 +18,5 @@ Type 'help' for more informations.
 
 ### 大事记
 
-[「MulanRevive」编程语言项目启动](https://zhuanlan.zhihu.com/p/103895446)
+- [为「木兰」编程语言添加对中文命名标识符的支持](https://zhuanlan.zhihu.com/p/103910116)
+- [「MulanRevive」编程语言项目启动](https://zhuanlan.zhihu.com/p/103895446)
