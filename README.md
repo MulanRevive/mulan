@@ -6,14 +6,16 @@
 本项目是对原木兰语言的逆向工程，部分逻辑完全靠猜想完成，具体代码与原木兰语言的实现没有任何关系，不代表原木兰项目功能、实现方式和代码质量。
 
 ### 运行
-在 Python 3.8.1测试过，在根目录下运行：
+在 Python 3.8.1 下测试通过. 需事先安装 codegen 和 rply. 
+
+安装此包后, 试运行如下:
 ```
-$ python -m ulang
+$ ulang
 Welcome to ulang's REPL..
 Type 'help' for more informations.
-> func test(x) { print(x+1) }
-> test(2)
-3
+> func 过(年) { println(年+1) }
+> 过(2019)
+2020
 ```
 
 ### 大事记
