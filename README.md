@@ -15,3 +15,7 @@ Type 'help' for more informations.
 > test(2)
 3
 ```
+
+### 大事记
+
+[「MulanRevive」编程语言项目启动](https://zhuanlan.zhihu.com/p/103895446)
