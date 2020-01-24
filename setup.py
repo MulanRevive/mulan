@@ -1,18 +1,18 @@
 import setuptools
 
-with open("README.md", "r") as 自述文件:
-    长描述 = 自述文件.read()
+with open("README.md", encoding="utf-8", mode="r") as readme:
+    longDescription = readme.read()
 
 setuptools.setup(
     name="mulang",
-    version="0.0.1",
+    version="0.0.5",
     author="无名",
     author_email="mulanrevive@gmail.com",
     entry_points = {
         "console_scripts": ['ulang = ulang.runtime.main:main']
         },
-    description="描述",
-    long_description=长描述,
+    description="木兰编程语言演示",
+    long_description=longDescription,
     long_description_content_type="text/markdown",
     url="https://github.com/MulanRevive/mulan",
     packages=setuptools.find_packages(),
