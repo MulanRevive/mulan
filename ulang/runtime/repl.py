@@ -9,55 +9,55 @@ from ulang.parser.core import Parser
 from ulang.parser.lexer import lexer
 from ulang.runtime.env import create_globals
 
-def is_close(source):
+def is_close(源码):
     """
-    Check if the given source code is closed,
+    Check if the given 源码 is closed,
     which means each '{' has a matched '}' 
     """
-    keywords = {
+    关键词 = {
      'FUNC', 'OPERATOR', 'ATTR', 'TYPE',
      'FOR', 'LOOP', 'WHILE',
      'IF', 'ELIF', 'ELSE',
      'TRY', 'CATCH', 'FINALLY'}
-    unmatched_sum = 0
+    未配对之和 = 0
     unclosed_sum = 0
-    if len(source) > 1:
-        if source[(-2)] == '\\':
+    if len(源码) > 1:
+        if 源码[-2] == '\\':
             return False
         else:
-            tokens = lexer.lex(source)
+            tokens = lexer.lex(源码)
             unclosed = []
-            unmatched = [
+            未配对 = [
             0, 0, 0]
             last = 2 * ['']
             for tok in tokens:
                 c = tok.gettokentype()
                 last[0], last[1] = last[1], c
-                if c in keywords:
+                if c in 关键词:
                     unclosed.append(c)
                 if c == 'LBRACE':
-                    unmatched[0] += 1
+                    未配对[0] += 1
                 elif c == 'RBRACE':
-                    unmatched[0] -= 1
+                    未配对[0] -= 1
                     if len(unclosed):
                         unclosed.pop(-1)
                 elif c == '(':
-                    unmatched[1] += 1
+                    未配对[1] += 1
                 elif c == ')':
-                    unmatched[1] -= 1
+                    未配对[1] -= 1
                 elif c == '[':
-                    unmatched[2] += 1
+                    未配对[2] += 1
                 elif c == ']':
-                    unmatched[2] -= 1
-            unmatched_sum = sum(unmatched)
+                    未配对[2] -= 1
+            未配对之和 = sum(未配对)
             unclosed_sum = len(unclosed)
             if unclosed_sum > 0:
-                if unmatched_sum == 0:
+                if 未配对_sum == 0:
                     if last[1] == 'NEWLINE':
                         if (last[0] == 'NEWLINE' or last[0]) == ';':
                             pass
                         return True
-    return unclosed_sum == 0 and unmatched_sum == 0
+    return unclosed_sum == 0 and 未配对之和 == 0
 
 
 def input_swallowing_interrupt(_input):
