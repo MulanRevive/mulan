@@ -24,40 +24,39 @@ def is_close(source):
     if len(source) > 1:
         if source[(-2)] == '\\':
             return False
-    else:
-        tokens = lexer.lex(source)
-        unclosed = []
-        unmatched = [
-         0, 0, 0]
-        last = 2 * ['']
-        for tok in tokens:
-            c = tok.gettokentype()
-            last[0], last[1] = last[1], c
-            if c in keywords:
-                unclosed.append(c)
-            if c == 'LBRACE':
-                unmatched[0] += 1
-            elif c == 'RBRACE':
-                unmatched[0] -= 1
-                if len(unclosed):
-                    unclosed.pop(-1)
-            elif c == '(':
-                unmatched[1] += 1
-            elif c == ')':
-                unmatched[1] -= 1
-            elif c == '[':
-                unmatched[2] += 1
-            elif c == ']':
-                unmatched[2] -= 1
-
-        unmatched_sum = sum(unmatched)
-        unclosed_sum = len(unclosed)
-        if unclosed_sum > 0:
-            if unmatched_sum == 0:
-                if last[1] == 'NEWLINE':
-                    if (last[0] == 'NEWLINE' or last[0]) == ';':
-                        pass
-                    return True
+        else:
+            tokens = lexer.lex(source)
+            unclosed = []
+            unmatched = [
+            0, 0, 0]
+            last = 2 * ['']
+            for tok in tokens:
+                c = tok.gettokentype()
+                last[0], last[1] = last[1], c
+                if c in keywords:
+                    unclosed.append(c)
+                if c == 'LBRACE':
+                    unmatched[0] += 1
+                elif c == 'RBRACE':
+                    unmatched[0] -= 1
+                    if len(unclosed):
+                        unclosed.pop(-1)
+                elif c == '(':
+                    unmatched[1] += 1
+                elif c == ')':
+                    unmatched[1] -= 1
+                elif c == '[':
+                    unmatched[2] += 1
+                elif c == ']':
+                    unmatched[2] -= 1
+            unmatched_sum = sum(unmatched)
+            unclosed_sum = len(unclosed)
+            if unclosed_sum > 0:
+                if unmatched_sum == 0:
+                    if last[1] == 'NEWLINE':
+                        if (last[0] == 'NEWLINE' or last[0]) == ';':
+                            pass
+                        return True
     return unclosed_sum == 0 and unmatched_sum == 0
 
 
