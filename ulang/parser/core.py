@@ -708,7 +708,7 @@ class Parser:
             operator = ast.Sub()
         elif operator == '*=':
             operator = ast.Mult()
-        if operator == '|=':
+        elif operator == '|=':
             operator = ast.BitOr()
         elif operator == '&=':
             operator = ast.BitAnd()
