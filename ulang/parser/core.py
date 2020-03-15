@@ -983,16 +983,6 @@ class Parser:
             operator = ast.Not()
         elif operator == '~':
             operator = ast.Invert()
-        return ast.Call(func=ast.Name('len',
-          ctx=(ast.Load()), lineno=(self.getlineno(p)),
-          col_offset=(self.getcolno(p))),
-          args=[
-         p[1]],
-          keywords=[],
-          starargs=None,
-          kwargs=None,
-          lineno=(self.getlineno(p)),
-          col_offset=(self.getcolno(p)))
         return ast.UnaryOp(operator,
           (p[1]), lineno=(self.getlineno(p)),
           col_offset=(self.getcolno(p)))
