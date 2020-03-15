@@ -305,8 +305,8 @@ class Parser:
     def type_stmts(self, p):
         if len(p) == 0:
             return []
-            if isinstance(p[1], list):
-                p[0] += p[1]
+        if isinstance(p[1], list):
+            p[0] += p[1]
         else:
             p[0].append(p[1])
         return p[0]
