@@ -838,7 +838,7 @@ class Parser:
             operator = ast.BitAnd()
         elif operator == '|':
             operator = ast.BitOr()
-        elif operator == '**':
+        elif operator == '^':
             operator = ast.Pow()
         else:
             breakpoint()
