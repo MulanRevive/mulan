@@ -1475,15 +1475,13 @@ class Parser:
     def if_stmt(self, p):
         if len(p) == 0:
             return []
-        elif len(p) == 5:
-            return ast.If(test=(p[1]),
-              body=(p[2]),
-              orelse=(p[(-1)]),
-              lineno=(self.getlineno(p)),
-              col_offset=(self.getcolno(p)))
         else:
             if not isinstance(p[(-1)], list):
-                p[-1] = []
+                return ast.If(test=(p[1]),
+                    body=(p[2]),
+                    orelse=[p[(-1)]],
+                    lineno=(self.getlineno(p)),
+                    col_offset=(self.getcolno(p)))
 
         return ast.If(test=(p[1]),
           body=(p[2]),
