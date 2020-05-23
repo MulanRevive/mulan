@@ -305,8 +305,8 @@ class Parser:
     def type_stmts(self, p):
         if len(p) == 0:
             return []
-            if isinstance(p[1], list):
-                p[0] += p[1]
+        if isinstance(p[1], list):
+            p[0] += p[1]
         else:
             p[0].append(p[1])
         return p[0]
@@ -708,7 +708,7 @@ class Parser:
             operator = ast.Sub()
         elif operator == '*=':
             operator = ast.Mult()
-        if operator == '|=':
+        elif operator == '|=':
             operator = ast.BitOr()
         elif operator == '&=':
             operator = ast.BitAnd()
@@ -838,7 +838,7 @@ class Parser:
             operator = ast.BitAnd()
         elif operator == '|':
             operator = ast.BitOr()
-        elif operator == '**':
+        elif operator == '^':
             operator = ast.Pow()
         else:
             breakpoint()
@@ -983,16 +983,6 @@ class Parser:
             operator = ast.Not()
         elif operator == '~':
             operator = ast.Invert()
-        return ast.Call(func=ast.Name('len',
-          ctx=(ast.Load()), lineno=(self.getlineno(p)),
-          col_offset=(self.getcolno(p))),
-          args=[
-         p[1]],
-          keywords=[],
-          starargs=None,
-          kwargs=None,
-          lineno=(self.getlineno(p)),
-          col_offset=(self.getcolno(p)))
         return ast.UnaryOp(operator,
           (p[1]), lineno=(self.getlineno(p)),
           col_offset=(self.getcolno(p)))
@@ -1488,15 +1478,13 @@ class Parser:
     def if_stmt(self, p):
         if len(p) == 0:
             return []
-        elif len(p) == 5:
-            return ast.If(test=(p[1]),
-              body=(p[2]),
-              orelse=(p[(-1)]),
-              lineno=(self.getlineno(p)),
-              col_offset=(self.getcolno(p)))
         else:
             if not isinstance(p[(-1)], list):
-                p[-1] = []
+                return ast.If(test=(p[1]),
+                    body=(p[2]),
+                    orelse=[p[(-1)]],
+                    lineno=(self.getlineno(p)),
+                    col_offset=(self.getcolno(p)))
 
         return ast.If(test=(p[1]),
           body=(p[2]),
