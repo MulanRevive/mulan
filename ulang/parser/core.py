@@ -871,27 +871,20 @@ class Parser:
     @pg_.production('bin_expr : expr === expr')
     @pg_.production('bin_expr : expr !== expr')
     def compare_expr(self, p):
-        operator = p[1].getstr()
-        if operator == '>':
-            operator = ast.Gt()
-        elif operator == '>=':
-            operator = ast.GtE()
-        elif operator == '<':
-            operator = ast.Lt()
-        if operator == '<=':
-            operator = ast.LtE()
-        elif operator == '==':
-            operator = ast.Eq()
-        else:
-            if operator == '!=':
-                operator = ast.NotEq()
-            elif operator == '===':
-                operator = ast.Is()
-            else:
-                operator = ast.IsNot()
-
+        对照表 = {
+            '>': ast.Gt(),
+            '>=': ast.GtE(),
+            '<': ast.Lt(),
+            '<=': ast.LtE(),
+            '==': ast.Eq(),
+            '!=': ast.NotEq(),
+            '===': ast.Is(),
+            '!==': ast.IsNot()
+            }
         return ast.Compare((p[0]),
-          [operator], [p[2]], lineno=(self.getlineno(p)),
+          [对照表[p[1].getstr()]],
+          [p[2]],
+          lineno=(self.getlineno(p)),
           col_offset=(self.getcolno(p)))
 
     @pg_.production('bin_expr : expr AND expr')
