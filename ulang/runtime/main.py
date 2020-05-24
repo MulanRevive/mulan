@@ -11,6 +11,7 @@ from ulang.runtime.repl import repl
 from ulang.parser.core import Parser
 from ulang.parser.lexer import lexer
 from ulang.codegen import blockly, python, ulgen
+from ulang.runtime.功用 import 语法树相关
 
 def usage(prog):
     info = '''usage: %s [-apbcidsDth] input_file
@@ -134,13 +135,15 @@ def main(argv=None):
         if dump_tokens:
             tokens = lexer.lex(source)
             for token in tokens:
-                print((token.gettokentype()), end=' ')
+                print(token)
+                #print((token.gettokentype()), end=' ')
 
             return
         parser = Parser()
         nodes = parser.parse(source, input_file)
         if dump_ast:
             print(ast.dump(nodes, True, True))
+            #print(语法树相关.格式化节点(nodes, 1))
             return
         if dump_python:
             print(python.dump(nodes))

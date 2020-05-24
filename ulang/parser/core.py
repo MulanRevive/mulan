@@ -150,7 +150,11 @@ class Parser:
         self.source_ = source.split('\n')
         try:
             tokens = self.lexer_.lex(source)
+            #for token in tokens:
+            #    print(token)
+            print("[done] lex")
             nodes = self.parser_.parse(tokens, state=self)
+            print("[done] parse")
         except LexingError as e:
             try:
                 raise SyntaxError(message='unknown token is found here',
@@ -234,12 +238,14 @@ class Parser:
 
     @pg_.production('start : stmt_list')
     def start(self, p):
+        print('start')
         return ast.Module(body=(p[0]),
           type_ignores=[])
 
     @pg_.production('block : ;')
     @pg_.production('block : LBRACE stmt_list RBRACE')
     def block(self, p):
+        print('block')
         if len(p) == 3:
             if p[1]:
                 return p[1]
@@ -252,6 +258,7 @@ class Parser:
     @pg_.production('stmt_list : stmt_list_ NEWLINE')
     @pg_.production('stmt_list : stmt_list_ ;')
     def stmt_list(self, p):
+        print('stmt_list')
         if len(p) > 0:
             return p[0]
         return []
@@ -260,6 +267,7 @@ class Parser:
     @pg_.production('stmt_list_ : stmt_list_ NEWLINE stmt')
     @pg_.production('stmt_list_ : stmt_list_ ; stmt')
     def stmt_list_(self, p):
+        print('stmt_list_')
         if len(p) == 1:
             return [p[0]]
         p[0].append(p[(-1)])
@@ -272,6 +280,7 @@ class Parser:
     @pg_.production('stmt : for_stmt')
     @pg_.production('stmt : declaration')
     def compound_stmt(self, p):
+        print('compound_stmt')
         return p[0]
 
     @pg_.production('type_define : TYPE name bases type_body')
@@ -290,6 +299,7 @@ class Parser:
     @pg_.production('bases : : prefix_expr')
     @pg_.production('bases : : prefix_exprs')
     def bases(self, p):
+        print('bases')
         if len(p) == 0:
             return []
         if isinstance(p[1], list):
@@ -507,6 +517,7 @@ class Parser:
     @pg_.production('stmt : throw_stmt')
     @pg_.production('stmt : ret_stmt')
     def stmt(self, p):
+        print('stmt')
         return p[0]
 
     @pg_.production('throw_stmt : THROW expr')
@@ -520,6 +531,7 @@ class Parser:
     @pg_.production('withitem : prefix_expr = expr')
     @pg_.production('withitem : expr')
     def withitem(self, p):
+        print('withitem')
         item = ast.withitem(context_expr=(p[(-1)]),
           optional_vars=None,
           lineno=(self.getlineno(p)),
@@ -662,6 +674,7 @@ class Parser:
     @pg_.production('expr_stmt : prefix_expr')
     @pg_.production('expr_stmt : yield_expr')
     def expr_stmt(self, p):
+        print('expr_stmt')
         if not isinstance(p[0], ast.Call):
             if not isinstance(p[0], ast.Yield):
                 if not isinstance(p[0], ast.Str):
@@ -776,6 +789,7 @@ class Parser:
     @pg_.production('prefix_exprs : prefix_exprs , prefix_expr')
     @pg_.production('prefix_exprs : prefix_expr , prefix_expr')
     def prefix_exprs(self, p):
+        print('prefix_exprs')
         if isinstance(p[0], list):
             p[0].append(p[2])
             return p[0]
@@ -784,6 +798,7 @@ class Parser:
 
     @pg_.production('assignment : prefix_exprs = exprs')
     def tuple_assignment(self, p):
+        print('tuple_assignment')
         for pe in p[0]:
             pe.ctx = ast.Store()
 
@@ -849,6 +864,7 @@ class Parser:
     @pg_.production('bin_expr : expr / expr')
     @pg_.production('bin_expr : expr % expr')
     def divrem_expr(self, p):
+        print('divrem_expr')
         operator = '__div__' if p[1].getstr() == '/' else '__rem__'
         return ast.Call(func=ast.Name(id=operator,
           ctx=(ast.Load()),
@@ -1029,6 +1045,7 @@ class Parser:
     @pg_.production('prefix_expr : list_expr')
     @pg_.production('prefix_expr : dict_expr')
     def prefix_expr(self, p):
+        print('prefix_expr')
         return p[0]
 
     @pg_.production('slice : expr')
@@ -1055,6 +1072,7 @@ class Parser:
 
     @pg_.production('slice : exprs , expr')
     def slice_indeces(self, p):
+        print('slice_indeces')
         p[0].append(p[2])
         return ast.ExtSlice(dims=[self.slice_index([e]) for e in p[0]],
           lineno=(self.getlineno(p)),
@@ -1062,6 +1080,7 @@ class Parser:
 
     @pg_.production('var : prefix_expr [ slice ]')
     def slice_expr(self, p):
+        print('slice_expr')
         return ast.Subscript(value=(p[0]),
           slice=(p[2]),
           ctx=(ast.Load()),
@@ -1083,12 +1102,14 @@ class Parser:
     @pg_.production('arguments : ( args )')
     @pg_.production('arguments : ( )')
     def arguments(self, p):
+        print('arguments')
         if len(p) != 3:
             return []
         return p[1]
 
     @pg_.production('call : prefix_expr arguments')
     def call(self, p):
+        #print('call ' + p[0].id)# + " " + p[1][0].id)
         args = []
         keywords = []
         for v, k in p[1]:
@@ -1318,6 +1339,7 @@ class Parser:
     @pg_.production('expr : name_const')
     @pg_.production('expr : range_expr', precedence='==')
     def expr(self, p):
+        print('expr')
         return p[0]
 
     @pg_.production('expr : varargs_expr')
@@ -1379,6 +1401,7 @@ class Parser:
     @pg_.production('list_expr : [ ]')
     @pg_.production('list_expr : [ exprs ]')
     def list_expr(self, p):
+        print('list_expr')
         elts = p[1] if len(p) == 3 else []
         return ast.List(elts=elts,
           ctx=(ast.Load()),
@@ -1392,6 +1415,7 @@ class Parser:
     @pg_.production('exprs : expr')
     @pg_.production('exprs : exprs , expr')
     def exprs(self, p):
+        print('exprs')
         if len(p) == 3:
             p[0].append(p[2])
             return p[0]
@@ -1401,6 +1425,7 @@ class Parser:
     @pg_.production('arg : expr')
     @pg_.production('arg : IDENTIFIER = expr')
     def arg(self, p):
+        print('arg')
         if len(p) == 1:
             return (p[0], None)
         return (
@@ -1532,6 +1557,7 @@ class Parser:
     @pg_.production('iterator : prefix_expr')
     @pg_.production('iterator : prefix_exprs')
     def iterator(self, p):
+        print('iterator')
         return p[0]
 
     @pg_.production('loop_range : expr')
@@ -1589,7 +1615,9 @@ class Parser:
     @pg_.error
     def error_handler(self, token):
         if token.getstr() == '\n':
+            print("换行")
             return
+        print("报错")
         raise SyntaxError(message=('unexpected token "%s"' % token.gettokentype()),
           filename=(self.filename_),
           lineno=(self.getlineno(token)),
