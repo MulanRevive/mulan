@@ -16,9 +16,11 @@ Type 'help' for more informations.
 2020
 ```
 
-相比使用交互控制台，建议通过命令行下`ulang 源码文件`运行代码。
+相比使用交互控制台，建议通过命令行下`ulang 源码文件`运行代码。推荐使用[VS Code 插件](https://marketplace.visualstudio.com/items?itemName=CodeInChinese.ulang)对源码文件进行编辑。
 
-另外，推荐使用[VS Code 插件](https://marketplace.visualstudio.com/items?itemName=CodeInChinese.ulang)对源码文件进行编辑。
+![快排1](截图/快速排序1.png)
+
+![快排2](截图/快速排序2.png)
 
 ### 大事记
 
