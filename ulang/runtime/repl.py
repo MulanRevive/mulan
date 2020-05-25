@@ -8,6 +8,7 @@ import sys, cmd
 from ulang.parser.core import Parser
 from ulang.parser.lexer import lexer
 from ulang.runtime.env import create_globals
+from ulang.runtime.功用 import 反馈信息
 
 def is_close(源码):
     """
@@ -119,7 +120,7 @@ class Repl(cmd.Cmd):
                 sys.exit()
             except BaseException as e:
                 try:
-                    sys.stderr.write('%s: %s\n' % (e.__class__.__name__, str(e)))
+                    sys.stderr.write('%s\n' % 反馈信息(e))
                 finally:
                     e = None
                     del e

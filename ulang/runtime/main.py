@@ -11,6 +11,7 @@ from ulang.runtime.repl import repl
 from ulang.parser.core import Parser
 from ulang.parser.lexer import lexer
 from ulang.codegen import blockly, python, ulgen
+from ulang.runtime.功用 import 反馈信息
 
 def usage(prog):
     info = '''usage: %s [-apbcidsDth] input_file
@@ -174,7 +175,7 @@ def main(argv=None):
             repl(globals=globals)
     except Exception as e:
         try:
-            sys.stderr.write('%s: %s\n' % (e.__class__.__name__, str(e)))
+            sys.stderr.write('%s\n' % 反馈信息(e))
             if trace_exception:
                 import pdb
                 extype, value, tb = sys.exc_info()
