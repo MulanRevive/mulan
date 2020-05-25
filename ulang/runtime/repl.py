@@ -53,7 +53,7 @@ def is_close(源码):
             未配对之和 = sum(未配对)
             unclosed_sum = len(unclosed)
             if unclosed_sum > 0:
-                if 未配对_sum == 0:
+                if 未配对之和 == 0:
                     if last[1] == 'NEWLINE':
                         if (last[0] == 'NEWLINE' or last[0]) == ';':
                             pass
