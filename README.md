@@ -29,9 +29,9 @@ Type 'help' for more informations.
 
 相比使用交互控制台，建议通过命令行下`ulang 源码文件`运行代码。推荐使用[VS Code 插件](https://marketplace.visualstudio.com/items?itemName=CodeInChinese.ulang)对源码文件进行编辑。
 
-![快排1](截图/快速排序1.png)
+![快排1](https://raw.githubusercontent.com/MulanRevive/mulan/dev/%E6%88%AA%E5%9B%BE/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F1.png)
 
-![快排2](截图/快速排序2.png)
+![快排2](https://raw.githubusercontent.com/MulanRevive/mulan/dev/%E6%88%AA%E5%9B%BE/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F2.png)
 
 ### 大事记
 
