@@ -9,7 +9,7 @@ setuptools.setup(
     author="无名",
     author_email="mulanrevive@gmail.com",
     entry_points = {
-        "console_scripts": ['ulang = ulang.runtime.main:main']
+        "console_scripts": ['木兰 = ulang.runtime.main:main']
         },
     description="木兰编程语言演示",
     long_description=longDescription,
