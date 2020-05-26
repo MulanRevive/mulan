@@ -9,9 +9,11 @@
 安装此包后, 试运行如下:
 ```
 $ ulang
-Welcome to ulang's REPL..
-Type 'help' for more informations.
-> func 过(年) { println(年+1) }
+木兰向您问好
+更多信息请说'你好'
+> func 过(年) {
+>> println(年 + 1)
+>> }
 > 过(2019)
 2020
 ```
