@@ -145,12 +145,12 @@ def repl(ps1='> ', ps2='>> ', globals=None):
     A simple read-eval-print-loop for the µLang program
     """
     info = [
-     '\tglobals: to list all builtins',
-     '\tquit: to quit the REPL',
-     '\thelp: to show this message']
+     '\t详情: 列出内置功能',
+     '\t再会: 结束对话',
+     '\t你好: 显示这段']
     if not globals:
         globals = create_globals(fname='<STDIN>')
-    globals['globals'] = lambda : print('\n'.join([' %s (%s)' % (k, v.__class__.__name__) for k, v in globals.items() if k != '__builtins__' if k != '___']))
-    globals['help'] = lambda *args: print('\n'.join(info)) if not args else print()
-    Repl(ps1, ps2, globals).cmdloop("Welcome to ulang's REPL..\nType 'help' for more informations.")
+    globals['详情'] = lambda : print('\n'.join([' %s (%s)' % (k, v.__class__.__name__) for k, v in globals.items() if k != '__builtins__' if k != '___']))
+    globals['你好'] = lambda *args: print('\n'.join(info)) if not args else print()
+    Repl(ps1, ps2, globals).cmdloop("木兰向您问好\n更多信息请说'你好'")
     sys.exit(0)

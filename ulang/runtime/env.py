@@ -260,7 +260,7 @@ def create_globals(argv=[], fname=''):
      'spawn':builtin_spawn, 
      'kill':builtin_kill, 
      'self':builtin_self, 
-     'quit':sys.exit, 
+     '再会':sys.exit,
      'open':open, 
      'install':pip_install, 
      'time':time.time, 
