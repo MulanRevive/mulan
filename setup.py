@@ -5,7 +5,7 @@ with open("README.md", encoding="utf-8", mode="r") as readme:
 
 setuptools.setup(
     name="mulang",
-    version="0.0.11",
+    version="0.0.12",
     author="无名",
     author_email="mulanrevive@gmail.com",
     entry_points = {
