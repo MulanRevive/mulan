@@ -175,7 +175,7 @@ def main(argv=None):
             repl(globals=globals)
     except Exception as e:
         try:
-            sys.stderr.write('%s\n' % 反馈信息(e))
+            sys.stderr.write('%s\n' % 反馈信息(e, input_file))
             if trace_exception:
                 import pdb
                 extype, value, tb = sys.exc_info()
