@@ -308,11 +308,13 @@ class Parser:
 
     @pg_.production('type_body : LBRACE type_stmts RBRACE')
     def type_body(self, p):
+        print('type_body')
         return p[1]
 
     @pg_.production('type_stmts : ')
     @pg_.production('type_stmts : type_stmts type_stmt')
     def type_stmts(self, p):
+        print('type_stmts')
         if len(p) == 0:
             return []
         if isinstance(p[1], list):
@@ -327,6 +329,7 @@ class Parser:
     @pg_.production('type_stmt : function')
     @pg_.production('type_stmt : property')
     def type_stmt(self, p):
+        print('type_stmt')
         return p[0]
 
     @pg_.production('property : ATTR IDENTIFIER block')
