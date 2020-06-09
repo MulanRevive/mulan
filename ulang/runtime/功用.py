@@ -13,9 +13,9 @@ def 反馈信息(例外, 源码文件=None):
     for 层号 in range(len(各层)-1, -1, -1):
         层 = 各层[层号]
         文件名 = 层.filename
-        行信息 = '位于第' + str(层.lineno) + '行'
+        行信息 = '见第' + str(层.lineno) + '行'
         if 源码文件 == None and 文件名 == "<STDIN>":
-            return 信息 + 行信息
+            return 信息 + ', ' + 行信息
         elif 文件名 == 源码文件:
             行内容 = 层.line
             if 出错处:
@@ -35,4 +35,9 @@ def 提示(类型, 原信息):
         return "请勿除以零"
     elif 类型 == 'RecursionError':
         return "递归过深。请确认: 1、的确需要递归 2、递归的收敛正确"
+    elif 类型 == 'UnboundLocalError':
+        return re.sub(
+            r"local variable '(.*)' referenced before assignment",
+            r"请先对本地变量'\1'赋值再引用",
+            原信息)
     return 原信息
